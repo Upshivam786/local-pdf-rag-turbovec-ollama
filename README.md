@@ -1,3 +1,6 @@
+## Demo
+
+![Demo](demo.png)
 # 🚀 Local PDF RAG System with TurboVec + Ollama
 
 A fully local Retrieval-Augmented Generation (RAG) system that allows you to upload PDFs and query them using an LLM — without any external APIs.
