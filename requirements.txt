@@ -1,0 +1,5 @@
+turbovec
+sentence-transformers
+ollama
+streamlit
+pypdf
