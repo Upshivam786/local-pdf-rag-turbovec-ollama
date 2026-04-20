@@ -46,6 +46,49 @@ This project explores:
 * 🔍 Source-grounded answers with citations
 
 ---
+## 🧠 Design Decisions
+
+### 1. Why TurboVec instead of FAISS?
+
+TurboVec uses TurboQuant compression, which significantly reduces memory usage while maintaining high recall. This makes it suitable for efficient local deployments.
+
+---
+
+### 2. Why Local LLM (Ollama)?
+
+* Ensures data privacy
+* No dependency on external APIs
+* Lower cost for repeated queries
+
+---
+
+### 3. Why Chunking with Overlap?
+
+Naive chunking breaks context and reduces retrieval quality.
+Overlap ensures semantic continuity and improves answer accuracy.
+
+---
+
+### 4. Why Strict Prompting?
+
+LLMs tend to hallucinate when context is incomplete.
+Strict prompting ensures:
+
+* grounded answers
+* reduced hallucination
+* predictable outputs
+
+---
+
+### 5. Why Citation-Based Answers?
+
+Adding source references:
+
+* improves trust
+* makes answers verifiable
+* aligns with real-world RAG systems
+
+
 
 ## 🏗️ Architecture
 
