@@ -5,93 +5,153 @@
 
 A fully local Retrieval-Augmented Generation (RAG) system that allows you to upload PDFs and query them using an LLM — without any external APIs.
 
+## 📁 Project Structure
+
+```
+local-pdf-rag-turbovec-ollama/
+│── app.py              # Streamlit UI (chat interface)
+│── rag.py              # Core RAG pipeline (retrieval + generation)
+│── indexer.py          # Builds vector index
+│── index.py            # Legacy / testing script
+│── query.py            # CLI-based querying (optional)
+│── requirements.txt    # Dependencies
+│── README.md           # Project documentation
+│── demo.png            # Demo screenshot
+│── data/               # Input documents (PDF/text)
+│── index/              # Stored vector index
+│── .gitignore
+```
+
 ---
 
-## 🔥 Features
+## ✨ Overview
 
-* 📄 Upload and query PDFs
-* ⚡ Fast vector search using TurboVec (TurboQuant)
-* 🧠 Local LLM inference with Ollama
+This project implements a fully local Retrieval-Augmented Generation (RAG) system that allows users to upload PDFs and query them using a Large Language Model (LLM).
+
+Unlike typical RAG systems that rely on cloud APIs, this pipeline runs completely offline, ensuring privacy, control, and cost efficiency.
+
+---
+
+## 🧠 Why this project?
+
+Most RAG implementations:
+
+* depend on external APIs
+* use standard vector search (FAISS)
+
+This project explores:
+
+* ⚡ TurboVec (TurboQuant) for efficient vector search
+* 🔒 Fully local LLM inference using Ollama
 * 🔍 Source-grounded answers with citations
-* 🔒 Fully offline (privacy-first)
 
 ---
 
-## 🧠 Architecture
+## 🏗️ Architecture
 
-PDF → Text → Chunking → Embeddings → TurboVec → Retrieval → LLM → Answer
+```
+User Upload PDF
+      ↓
+Text Extraction (pypdf)
+      ↓
+Chunking (overlap)
+      ↓
+Embeddings (Sentence Transformers)
+      ↓
+TurboVec Index (TurboQuant)
+      ↓
+Query Embedding
+      ↓
+Top-K Retrieval
+      ↓
+Context Construction
+      ↓
+LLM (Ollama)
+      ↓
+Answer with Citations
+```
+
+---
+
+## 🔍 System Flow
+
+1. User uploads a PDF
+2. Text is extracted
+3. Text is split into chunks
+4. Chunks are converted into embeddings
+5. TurboVec stores vectors
+6. Query is embedded and matched
+7. Relevant chunks are retrieved
+8. LLM generates answer
+9. Response includes citations
+
+---
+
+## 🚀 Features
+
+* 📄 PDF upload and querying
+* ⚡ Fast vector search using TurboVec
+* 🧠 Local LLM inference via Ollama
+* 🔍 Citation-based answers
+* 🔒 Fully offline
+* 💬 Chat-style interface
 
 ---
 
 ## ⚙️ Setup
 
-### 1. Clone repo
-
 ```bash
-git clone https://github.com/YOUR_USERNAME/local-pdf-rag-turbovec-ollama.git
+git clone https://github.com/Upshivam786/local-pdf-rag-turbovec-ollama.git
 cd local-pdf-rag-turbovec-ollama
-```
-
-### 2. Install dependencies
-
-```bash
 pip install -r requirements.txt
-```
-
-### 3. Install and run Ollama
-
-```bash
 ollama pull llama3.2
 ollama serve
-```
-
----
-
-## 🚀 Run the app
-
-```bash
 streamlit run app.py
 ```
 
 ---
 
-## 💡 Example Use Cases
+## 💡 Example
 
-* Resume analysis
-* Research paper Q&A
-* Private document search
-* Knowledge base assistant
+**Question:**
+What does the document say about models?
+
+**Answer:**
+Model selection is a cost structure decision...
+
+**Sources:**
+[0] Model selection is a cost structure...
+[1] Scaling issues occur with wrong model choice...
 
 ---
 
 ## 🧠 Key Learnings
 
-* RAG systems depend more on retrieval than the model
-* Chunking strategy impacts answer quality
-* Local AI pipelines improve privacy and control
-* Handling hallucinations requires strict prompting
+* RAG quality depends more on retrieval than model
+* Chunking impacts performance heavily
+* Strict prompting reduces hallucination
+* Local pipelines improve privacy
 
 ---
 
-## 📌 Future Improvements
-
-* PDF text highlighting
-* Hybrid search (keyword + vector)
-* Persistent indexing
-* Multi-document support
-
----
-
-## ⭐ Tech Stack
+## 🔧 Tech Stack
 
 * Python
-* TurboVec (TurboQuant vector search)
+* TurboVec
 * Sentence Transformers
-* Ollama (LLM)
+* Ollama
 * Streamlit
+
+---
+
+## 🚀 Future Improvements
+
+* PDF highlighting
+* Hybrid search
+* Multi-document support
 
 ---
 
 ## 🙌 Author
 
-Shivam Upadhyay
+**Shivam Upadhyay**
