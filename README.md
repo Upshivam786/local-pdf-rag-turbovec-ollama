@@ -193,6 +193,40 @@ Model selection is a cost structure decision...
 * Hybrid search
 * Multi-document support
 
+## ⚠️ Limitations
+
+- Current chunking strategy is simple and may not preserve full semantic structure  
+- No persistent index (recomputed on each run)  
+- Works best for small to medium-sized PDFs  
+- No metadata filtering or document-level ranking  
+- Limited evaluation of retrieval quality  
+
+Future work will address these areas.
+
+## ⚖️ Design Trade-offs
+
+- **TurboVec vs FAISS**  
+  TurboVec provides better compression, but FAISS has broader ecosystem support.
+
+- **Local LLM vs API-based models**  
+  Local models ensure privacy but may have lower accuracy compared to large cloud models.
+
+- **Simple chunking vs structured parsing**  
+  Simpler implementation chosen for speed of development, at the cost of precision.
+
+- **On-the-fly indexing vs persistent storage**  
+  Dynamic indexing keeps system simple but increases latency.
+
+
+  ## ⚡ Performance Notes
+
+- Embedding model: all-MiniLM-L6-v2 (fast, lightweight)
+- Vector search: TurboQuant-based compression
+- Retrieval latency: low for small PDFs
+- Memory footprint reduced via vector compression
+
+Performance may vary with document size and chunking strategy.
+
 ---
 
 ## 🙌 Author
